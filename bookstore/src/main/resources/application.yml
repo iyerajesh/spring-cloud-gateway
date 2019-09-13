@@ -9,3 +9,7 @@ eureka:
       defaultZone: http://localhost:8888/eureka
   instance:
     preferIpAddress: true
+
+jaeger.tracer:
+  host: localhost
+  port: 6831

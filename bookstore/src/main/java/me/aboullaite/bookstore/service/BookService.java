@@ -16,29 +16,53 @@ public class BookService {
     private List<Book> books;
 
     public BookService() {
+
         this.books = new ArrayList<>();
-        books.add(new Book("Becoming", "9781524763138", Arrays.asList(new Author("Michelle Obama"))));
-        books.add(new Book("Liar Liar", "9780316418249",  Arrays.asList(new Author("James Patterson"), new Author("Candice Fox"))));
-        books.add(new Book("The Chef", "9780316453301", Arrays.asList(new Author("Max DiLallo "), new Author("James Patterson"))));
-        books.add(new Book("Stranger Things - Suspicious Minds", "9781984800886", Arrays.asList(new Author("Gwenda Bond"))));
+
+        books.add(Book.builder().
+                title("Becoming").
+                isbn("9781524763138").
+                authors(Arrays.asList(Author.builder().
+                        name("Michelle Obama").
+                        build()))
+                .build());
+
+        books.add(Book.builder().
+                title("Liar Liar").
+                isbn("9780316418249").
+                authors(Arrays.asList(Author.builder().name("James Paterson").build()))
+                .build());
+
+        books.add(Book.builder().
+                title("The Chef").
+                isbn("9780316453301").
+                authors(Arrays.asList(Author.builder().name("James Dalio").build(),
+                        Author.builder().name("James Paterson").build()))
+                .build());
+
+        books.add(Book.builder().
+                title("Stranger Things - Suspicious Minds").
+                isbn("9781984800886").
+                authors(Arrays.asList(Author.builder().name("Gwenda Bond").build()))
+                .build());
     }
 
-    public List<Book> getBooks(){
+    public List<Book> getBooks() {
         return this.books;
     }
 
-    public Optional<Book> getBookByIsbn(String isbn){
+    public Optional<Book> getBookByIsbn(String isbn) {
         return books.stream().filter(b -> b.getIsbn().equals(isbn)).findFirst();
     }
 
-    public void addBook(Book book){
+    public void addBook(Book book) {
         books.add(book);
     }
 
     public List<Book> longExecutionMethod() {
         try {
             // Simulate random poor performing method!
-            if(ThreadLocalRandom.current().nextInt() > 0.5)
+            if (ThreadLocalRandom.current().nextInt() > 0.5)
                 Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
